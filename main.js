@@ -1,11 +1,11 @@
-import Map from 'ol/Map.js';
-import View from 'ol/View.js';
-import {Draw, Modify, Select, Snap} from 'ol/interaction.js';
-import {OSM, Vector as VectorSource} from 'ol/source.js';
-import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer.js';
-import Feature from 'ol/Feature.js';
-import Point from 'ol/geom/Point.js';
-import {Icon, Style} from 'ol/style.js';
+import Map from 'ol/Map';
+import View from 'ol/View';
+
+import {OSM, Vector as VectorSource} from 'ol/source';
+import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
+import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
+import {Icon, Style} from 'ol/style';
 
 const raster = new TileLayer({
   source: new OSM(),
