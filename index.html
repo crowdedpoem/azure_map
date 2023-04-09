@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Snap Interaction</title>
     <link rel="stylesheet" href="node_modules/ol/ol.css">
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
     <style>
       .map {
         width: 100%;
@@ -16,6 +18,86 @@
 
     <!-- Pointer events polyfill for old browsers, see https://caniuse.com/#feat=pointer -->
     <script src="https://cdn.jsdelivr.net/npm/elm-pep@1.0.6/dist/elm-pep.js"></script>
-    <script type="module" src="main.js"></script>
+    
+<!--     
+    <script type="module" src="main.js"></script> -->
+    <script>
+      const raster = new ol.layer.Tile({
+        source: new ol.source.OSM(),
+      });
+      
+
+      var wash = new ol.Feature({
+        geometry: new ol.geom.Point([-13592087.458075, 6052476.074551]),
+      });
+      
+      var home = new ol.Feature({
+        geometry: new ol.geom.Point([-13567279.368940, 4531725.156410]),
+      });
+      
+      var pune = new ol.Feature({
+        geometry: new ol.geom.Point([8264713.038841, 2113368.598040]),
+      });
+      
+      pune.setStyle(
+        new ol.style.Style({
+          image: new ol.style.Icon({
+            crossOrigin: 'anonymous',
+            src: 'data/india.svg',
+            scale: 0.025,
+          }),
+        })
+      );
+      
+      
+      home.setStyle(
+        new ol.style.Style({
+          image: new ol.style.Icon({
+            crossOrigin: 'anonymous',
+            src: 'data/california.svg',
+            scale: 0.03,
+          }),
+        })
+      );
+      
+      wash.setStyle(
+        new ol.style.Style({
+          image: new ol.style.Icon({
+            crossOrigin: 'anonymous',
+            src: 'data/washington.svg',
+            scale: 0.03,
+          }),
+        })
+      );
+      
+     
+      
+      
+      const vectorSource = new ol.source.Vector({
+        features: [pune, wash , home],
+      });
+      
+      const vector = new ol.layer.Vector({
+        // source: new VectorSource(),
+        source: vectorSource//,
+        // style: {
+        //   'fill-color': 'rgba(255, 255, 255, 0.2)',
+        //   'stroke-color': '#ffcc33',
+        //   'stroke-width': 2,
+        //   'circle-radius': 7,
+        //   'circle-fill-color': '#ffcc33',
+        // },
+      });
+      
+      
+      const map = new ol.Map({
+        layers: [raster, vector],
+        target: 'map',
+        view: new ol.View({
+          center: [-13431882.463470, 4204826.404880],
+          zoom: 6,
+        }),
+      });
+       </script>
   </body>
 </html>
